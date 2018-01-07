@@ -9,12 +9,19 @@ Imaginons qu'on veuille détecter un double clique, ou même un triple clique ( 
  ou qu'il swipe à gauche / haut bas droite, ou qu'il scroll, on puisse y mettre notre code
  Genre function left(){ // ici notre code} éxecute le code quand l'utilisateur fait fleche de gauche, ou swipe à gauche
 
+
+Le clique molette pourrait permettre d'appeler une fonction non ?
+
+
+Clique droit: appel la fonction clique_droit(overwrite tout ?,tableau JSON avec le nom des fonctions et le )
+
+
  */
 libraryName="marabout.js";
 
 
-function marabout__init(){ // We check if jquery is loaded before marabout.js library
-  if(!(window.jQuery)){
+function marabout__init(){ // Constructor of the plugin, it will take arguments later
+  if(!(window.jQuery)){ // We check if jquery is loaded before marabout.js library
     alert("You must load Jquery before calling "+libraryName);
     console.log("Unable to execute "+libraryName);
     return false;
@@ -44,36 +51,36 @@ function marabout__init(){ // We check if jquery is loaded before marabout.js li
 function marabout__global_controls(){
 //Keys
 
-  $('html').keydown(function(e){
+    $('html').keydown(function(e){
 
-     if(e.which == 37){ left('key');  }
-     if(e.which == 38){ delaiSCROLL=setTimeout(function(){ up('scroll'); }, 100);    }
-     if(e.which == 39){ right('key'); }
-     if(e.which == 40){ delaiSCROLL=setTimeout(function(){ down('scroll'); }, 100);;  }
+       if(e.which == 37){ left('key');  }
+       if(e.which == 38){ delaiSCROLL=setTimeout(function(){ up('scroll'); }, 100);    }
+       if(e.which == 39){ right('key'); }
+       if(e.which == 40){ delaiSCROLL=setTimeout(function(){ down('scroll'); }, 100);;  }
 
-  });
+    });
 
-//Scroll
-var lastScrollPosition = 0;
-delaiSCROLL=setTimeout(function(){},100);//Needed dont delete
-window.onscroll = function() {
-    var newScrollPosition = window.scrollY;
-    clearTimeout(delaiSCROLL);
-    if (newScrollPosition < lastScrollPosition){
-        delaiSCROLL=setTimeout(function(){ up('scroll'); }, 100);
+  //Scroll
+  var lastScrollPosition = 0;
+  delaiSCROLL=setTimeout(function(){},100);//Needed dont delete
+  window.onscroll = function() {
+      var newScrollPosition = window.scrollY;
+      clearTimeout(delaiSCROLL);
+      if (newScrollPosition < lastScrollPosition){
+          delaiSCROLL=setTimeout(function(){ up('scroll'); }, 100);
 
-    }else{
-        delaiSCROLL=setTimeout(function(){ down('scroll'); }, 100);
-    }
-    lastScrollPosition = newScrollPosition;
+      }else{
+          delaiSCROLL=setTimeout(function(){ down('scroll'); }, 100);
+      }
+      lastScrollPosition = newScrollPosition;
+  }
+
 }
 
-}
-
-function left(method){console.log("User called LEFT using the "+method+" method.");}
-function up(method){console.log("User called UP using the "+method+" method.");}
-function right(method){console.log("User called RIGHT using the "+method+" method.");}
-function down(method){console.log("User called DOWN using the "+method+" method.");}
+  function left(method){console.log(libraryName+"// User called LEFT using the "+method+" method.");}
+  function up(method){console.log(libraryName+"// User called UP using the "+method+" method.");}
+  function right(method){console.log(libraryName+"// User called RIGHT using the "+method+" method.");}
+  function down(method){console.log(libraryName+"// User called DOWN using the "+method+" method.");}
 
 
 
