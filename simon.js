@@ -46,15 +46,34 @@ function marabout__global_controls(){
 
   $('html').keydown(function(e){
 
-     if(e.which == 37){ alert( "LEFT" ); }
-     if(e.which == 38){ alert( "UP" ); }
-     if(e.which == 39){ alert( "RIGHT" ); }
-     if(e.which == 40){ alert( "DOWN" ); }
+     if(e.which == 37){ left('key');  }
+     if(e.which == 38){ delaiSCROLL=setTimeout(function(){ up('scroll'); }, 100);    }
+     if(e.which == 39){ right('key'); }
+     if(e.which == 40){ delaiSCROLL=setTimeout(function(){ down('scroll'); }, 100);;  }
 
   });
 
+//Scroll
+var lastScrollPosition = 0;
+delaiSCROLL=setTimeout(function(){},100);//Needed dont delete
+window.onscroll = function() {
+    var newScrollPosition = window.scrollY;
+    clearTimeout(delaiSCROLL);
+    if (newScrollPosition < lastScrollPosition){
+        delaiSCROLL=setTimeout(function(){ up('scroll'); }, 100);
+
+    }else{
+        delaiSCROLL=setTimeout(function(){ down('scroll'); }, 100);
+    }
+    lastScrollPosition = newScrollPosition;
 }
 
+}
+
+function left(method){console.log("User called LEFT using the "+method+" method.");}
+function up(method){console.log("User called UP using the "+method+" method.");}
+function right(method){console.log("User called RIGHT using the "+method+" method.");}
+function down(method){console.log("User called DOWN using the "+method+" method.");}
 
 
 

@@ -4,8 +4,13 @@
   <script src="simon.js"></script>
   <script src="sofiane.js"></script>
   <script src="corentin.js"></script>
+  <script>
+  function left(){
+    alert("J'ai overwrite la fonction left !");
+  }
+  </script>
 </head>
-<body>
+<body style="height:110vh;">
 
 
 
