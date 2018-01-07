@@ -13,7 +13,7 @@ Imaginons qu'on veuille détecter un double clique, ou même un triple clique ( 
 Le clique molette pourrait permettre d'appeler une fonction non ?
 
 
-Clique droit: appel la fonction clique_droit(overwrite tout ?,tableau JSON avec le nom des fonctions et le )
+Clique droit: appel la fonction clique_droit(overwrite tout ?,tableau JSON avec le nom des fonctions et le texte qui sera affiché)
 
 
  */
@@ -39,7 +39,7 @@ function marabout__init(environnement="dev"){ // Global constructor of the plugi
 
 
     marabout__global_controls();
-    
+
 
 
 
