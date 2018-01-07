@@ -29,15 +29,22 @@ function marabout__init(environnement="dev"){ // Global constructor of the plugi
   }
   else{
     console.log(libraryName+" executed successfully.");
-    if(environnement=="public"){console.log = function () {};}// Disable console printing if environnement is public
-    else{console.timeEnd('marabout__init');}
-    // Here we'll execut every function that need to be executed to work.
+    if(environnement=="public"){ // Put here the instruction when environnement == public
+          console.log = function () {}; // Disable console printing if environnement is public
+          }
+    else{  // Put here the instruction when environnement != public
+
+          }
+    //////////// Caller of the global constructor we'll execut every function that need to be executed to work.
 
 
     marabout__global_controls();
+    
 
 
 
+    //////////// End of the caller of the global constructor
+    if(environnement=="dev"){console.timeEnd('marabout__init');}
     return true;
   }}
 
@@ -83,10 +90,10 @@ function marabout__global_controls(){
 
 }
 
-  function left(method){console.log(libraryName+"// User called LEFT using the "+method+" method.");}
-  function up(method){console.log(libraryName+"// User called UP using the "+method+" method.");}
-  function right(method){console.log(libraryName+"// User called RIGHT using the "+method+" method.");}
-  function down(method){console.log(libraryName+"// User called DOWN using the "+method+" method.");}
+  function left(method='NULL'){console.log(libraryName+"// User called LEFT using the "+method+" method.");}
+  function up(method='NULL'){console.log(libraryName+"// User called UP using the "+method+" method.");}
+  function right(method='NULL'){console.log(libraryName+"// User called RIGHT using the "+method+" method.");}
+  function down(method='NULL'){console.log(libraryName+"// User called DOWN using the "+method+" method.");}
 
 
 
