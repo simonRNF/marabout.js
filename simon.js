@@ -20,20 +20,26 @@ Clique droit: appel la fonction clique_droit(overwrite tout ?,tableau JSON avec 
 libraryName="marabout.js";
 
 
-function marabout__init(){ // Constructor of the plugin, it will take arguments later
+console.time('marabout__init');
+function marabout__init(environnement="dev"){ // Global constructor of the plugin, it will take arguments later
   if(!(window.jQuery)){ // We check if jquery is loaded before marabout.js library
     alert("You must load Jquery before calling "+libraryName);
     console.log("Unable to execute "+libraryName);
     return false;
   }
   else{
+    console.log(libraryName+" executed successfully.");
+    if(environnement=="public"){console.log = function () {};}// Disable console printing if environnement is public
+    else{console.timeEnd('marabout__init');}
     // Here we'll execut every function that need to be executed to work.
+
+
     marabout__global_controls();
 
-    console.log(libraryName+" executed successfully.");
+
+
     return true;
   }}
-
 
 
 
@@ -54,9 +60,9 @@ function marabout__global_controls(){
     $('html').keydown(function(e){
 
        if(e.which == 37){ left('key');  }
-       if(e.which == 38){ delaiSCROLL=setTimeout(function(){ up('scroll'); }, 100);    }
+       if(e.which == 38){ delaiSCROLL=setTimeout(function(){ up('scroll'); }, 50);    }
        if(e.which == 39){ right('key'); }
-       if(e.which == 40){ delaiSCROLL=setTimeout(function(){ down('scroll'); }, 100);;  }
+       if(e.which == 40){ delaiSCROLL=setTimeout(function(){ down('scroll'); }, 50);;  }
 
     });
 
@@ -67,10 +73,10 @@ function marabout__global_controls(){
       var newScrollPosition = window.scrollY;
       clearTimeout(delaiSCROLL);
       if (newScrollPosition < lastScrollPosition){
-          delaiSCROLL=setTimeout(function(){ up('scroll'); }, 100);
+          delaiSCROLL=setTimeout(function(){ up('scroll'); }, 50);
 
       }else{
-          delaiSCROLL=setTimeout(function(){ down('scroll'); }, 100);
+          delaiSCROLL=setTimeout(function(){ down('scroll'); }, 50);
       }
       lastScrollPosition = newScrollPosition;
   }
@@ -93,4 +99,4 @@ function marabout__global_controls(){
 
 
 
-marabout__init();
+marabout__init('dev');
