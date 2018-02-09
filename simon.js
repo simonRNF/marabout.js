@@ -106,4 +106,90 @@ function marabout__global_controls(){
 
 
 
+
+  //progressbar(hexadecimal color, id / class of element to start, id / class of element to stop, position of the progressbar,element where the navbar will be sticked)
+  function marabout__progressbar(color=false,start=false,end=false,pos='bottom',element=false){
+          $( document ).ready(function() {// We execute the program when the full body is loaded.
+              marabout__progressbar_init(color,start,end,pos,element);
+          });
+  }//end of function progressbar
+
+  function marabout__progressbar_init(color,start,end,pos,element){
+    if(!color){color='#6633ff';}
+    if(start){from=$(start).position().top;}else{from=0;}// If the progressbar need to start somewhere in the page
+    if(start){to=$(end).position().top+$(end).height();}else{to=$('body').height();} //If the progressbar need to stop somewhere in the page
+    if(element){is_fixed='absolute';element_pos='initial';}else{is_fixed='fixed';element='body';element_pos='0px';}// Check if the element ot add the progressbar is the body or not
+
+
+    progressbar_content="<div id='progressbar'></div>";
+
+    switch(pos) {
+      case "top":
+            progressbar_style="<style type='text/css'>#progressbar{height:4px;background-color:"+color+";position:"+is_fixed+";width:0%;top:"+element_pos+";}</style> ";
+            parameter="width";
+          break;
+      case "bottom":
+            progressbar_style="<style type='text/css'>#progressbar{height:4px;background-color:"+color+";position:"+is_fixed+";width:0%;bottom:"+element_pos+";}</style> ";
+            parameter="width";
+          break;
+      case "left":
+            progressbar_style="<style type='text/css'>#progressbar{width:4px;background-color:"+color+";position:"+is_fixed+";height:0%;left:"+element_pos+";top:0px;}</style> ";
+            parameter="height";
+          break;
+      case "right":
+            progressbar_style="<style type='text/css'>#progressbar{width:4px;background-color:"+color+";position:"+is_fixed+";height:0%;right:"+element_pos+";top:0px;}</style> ";
+            parameter="height";
+          break;
+      default:
+            progressbar_style="<style type='text/css'>#progressbar{height:4px;background-color:"+color+";position:"+is_fixed+";width:0%;bottom:"+element_pos+";}</style> ";
+            parameter="width";
+  }
+
+    $(element).append(progressbar_content+progressbar_style);
+
+    total=to-from; //the total height of the height the scroll will go througt
+    $(window).scroll(function (event) { // we listen to the page scroll
+
+          var scroll = $(window).scrollTop()+$(window).height();
+          current=((scroll-from)*100)/total;
+          if(parameter=="width"){
+                  if(scroll<from){$( "#progressbar" ).animate({ "width": "0%" }, 1 );}
+                  if(scroll>to){$( "#progressbar" ).animate({ "width": "100%" }, .2 );}
+                  if(scroll>=from && scroll<=to){
+                    $( "#progressbar" ).animate({ "width": current+"%" }, .2 );
+                  }
+          }
+          else{
+                  if(scroll<from){$( "#progressbar" ).animate({ "height": "0%" }, .5 );}
+                  if(scroll>to){$( "#progressbar" ).animate({ "height": "100%" }, .2 );}
+                  if(scroll>=from && scroll<=to){
+
+
+                    $( "#progressbar" ).animate({ "height": current+"%" }, .2 );
+            }
+          }
+
+
+      });
+
+  }//end of function progressbar_init
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 marabout__init('dev');
