@@ -1,0 +1,28 @@
+/*blur bg*/
+*{
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+}
+body{
+  position: relative;
+}
+  .BG_blur_append{
+    width:50vw;
+    height:400px;
+    padding: 30px;
+    display: flex;
+  }
+  .BG_blur_append div{
+    color:white;
+    display: flex;
+    flex:1;
+    background-color: rgba(0,0,0,0.15);
+    justify-content: center;
+    align-items: center;
+  }
+  .BG_blur_append div p{
+    flex-shrink: 1;
+    flex-grow: 0;
+  }
+/*blur bg*/
