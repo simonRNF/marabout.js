@@ -174,6 +174,166 @@ function marabout__global_controls(){
 
   }//end of function progressbar_init
 
+  libraryName="PanelStacker.js";
+  var stackerFlow=new Array();
+
+  function PS__init(cover=true){ // We check if jquery is loaded before PanelStacker.js library
+    if(!(window.jQuery)){
+      console.log("You must load Jquery before calling "+libraryName);
+      console.log("Unable to execute "+libraryName);
+      return false;
+    }
+    else{
+      // Here we'll execut every function that need to be executed to work.
+      if(cover){// If the user want the background to be blury
+        $( "body" ).append( "<div class='PS__cover'></div>" );
+        PS__overlay(false,0);
+        }
+
+      PS__listener();
+
+
+
+
+
+      console.log(libraryName+" executed successfully.");
+      return true;
+    }
+  }
+
+
+
+
+
+
+  // Main mechanism of panelStacker.js
+  class Panel {
+
+    constructor(element) {
+      this.element = element;
+      this.status=false;
+    }
+
+    // Used to know if the panel is active or not.
+    get getStatus() {
+      return this.status;
+    }
+
+
+
+    // Used to close a specified panel
+    close(){
+      this.status=false;
+
+      delete stackerFlow[this.element];
+      PS__refresh();
+      $(this.element).css("z-index", "1001").animate({"right": "-100%"});
+      $(this.element).fadeOut();
+
+
+      PS__overlay(false);
+
+    }
+
+    // Used to open a specified panel
+    open(){
+
+      this.status=true;
+      $(this.element).fadeIn();
+      if(!(this.element in stackerFlow)){
+        //$(this.element).css("right", PS__totalFlow());
+        $(this.element).animate({"right": PS__totalFlow()});
+        PS__overlay(true);
+        PS__refresh();
+      }
+
+
+
+      stackerFlow[this.element]=$(this.element).width();
+    }
+
+    // Used to define when a panel is the father of another one, when the father close, the sons closes.
+    need(parent){
+
+      var son=this;
+      setTimeout(function(){
+              $(parent.element+" .closePanel").click(function() {// When user click on .closePanel of the parent
+                  son.close();
+                });
+              },300);
+
+    }
+
+  }/////////       end of Panel class
+
+
+  function PS__overlay(mode,speed=500){
+
+        if(mode){
+        setTimeout(function(){
+                  $(".PS__cover").fadeIn(speed);
+                  },500);
+        }
+        else if(Object.keys(stackerFlow).length<1){
+          $(".PS__cover").fadeOut(speed);
+        }
+
+  }
+
+  function PS__totalFlow(){
+    var total=0;
+    for (var index in stackerFlow) {
+          total += stackerFlow[index];
+
+      }
+    return total;
+  }
+
+  function PS__refresh(){
+    var origin=0;
+    var z_index=1050;
+    for (var index in stackerFlow) {
+
+          $(index).css("z-index", z_index).animate({"right": origin},100);
+          origin+=stackerFlow[index];
+          z_index--;
+
+      }
+  }
+
+  function PS__listener(){
+    $(".panel .closePanel").click(function() {// When user click on .closePanel Base panel
+        id=$(this).closest('.panel').attr('id');
+        try{
+              eval(id).close();
+            }
+        catch (err){
+          console.log("panelStacker.js-> When using .closePanel button, you must name your panel Object with the DOM id you gave him.")
+        }
+
+      });// Enf of closePanel button click
+
+  }
+
+
+
+
+
+
+     // Initialisation of the controller
+  setTimeout(function(){},100);
+
+      $(document).ready(function(){
+
+        $("#panel1 .closePanel").click(function() {// When user click on .closePanel Base panel
+            test.close();
+
+          });
+
+
+
+        PS__init();
+      });
 
 
 
