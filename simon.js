@@ -249,7 +249,6 @@ function marabout__global_controls(){
 
 
 
-      stackerFlow[this.element]=$(this.element).width();
       stackerFlow[this.element]=$(this.element).outerWidth();
     }
 
