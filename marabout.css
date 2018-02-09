@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+
+.PS__cover{
+  background-color:rgba(0,0,0,0.7);
+  position:fixed;
+  top:0;  left:0;
+  width:100vw;  height:100vh;
+  z-index:1000;
+
+}
+
+
+/*panelStacker*/
+        #panelStacker{
+          position:fixed;
+          top:0;  left:0;
+          width:100vw;    height:100vh;
+        }
+        .panel{
+          position:fixed;
+          top:0%; right:-100%;
+          height:100%;
+          padding:15px;
+          box-sizing: border-box;
+          z-index:1002;
+
+          display:none;
+        }
+
+        .closePanel{
+          cursor:pointer;
+          display:block;
+          float:right;
+        }
+/*end panelStacker*/
+
+
+
+
+/*BG_blur*/
+        .BG_blur{
+          z-index: -1;
+          overflow: hidden;
+          position:absolute;
+          clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+        .BG_blur_wrapper_colors{
+          position: absolute;
+          width:100%;
+          height:100%;
+          transform: scale(1.25);
+        }
+        .BG_blur_colors{
+          position:absolute;
+        }
+/*end BG_blur*/
