@@ -250,6 +250,7 @@ function marabout__global_controls(){
 
 
       stackerFlow[this.element]=$(this.element).width();
+      stackerFlow[this.element]=$(this.element).outerWidth();
     }
 
     // Used to define when a panel is the father of another one, when the father close, the sons closes.
