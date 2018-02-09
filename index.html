@@ -10,9 +10,27 @@
   }
 marabout__progressbar(0,'#sept',"#fin",0,);
 
+
+
+test = new Panel("#panel1");
+ panel2 = new Panel("#panel2");
+ panel2.need(test);
+ panel3 = new Panel("#panel3");
+
+ function showpanel1(){test.open();}
+ function showpanel2(){panel2.open();}
+ function showpanel3(){panel3.open();}
+
+
+
+ $(function() {
+   console.log( "ready!" );
+});
+
+
   </script>
   <style>p{width:400px;}</style>
-  <style src="style.css"></style>
+  <link rel="stylesheet" type="text/css" href="marabout.css">
 </head>
 <body style="height:110vh;">
 
@@ -22,6 +40,31 @@ marabout__progressbar(0,'#sept',"#fin",0,);
 
 
 
+
+<h1><b>Panel stacker</b></h1>
+<button onclick="showpanel1()">Open main panel</button><br><br>
+<button onclick="showpanel3()">Open secondary panel</button>
+
+
+    <div id="panel1" class="panel">
+     <i class="closePanel material-icons">clear</i><br>
+      This is the <b>main panel</b>, here you can access to my <b>subpannel</b>, or to the <b>secondary pannel</b>.<br><br>
+    <button onclick="showpanel2()">Open subpannel</button><br>
+    <button onclick="showpanel3()">Open secondarypannel</button>
+    </div>
+
+
+    <div id="panel2" class="panel">
+      <i class="closePanel material-icons">clear</i><br>
+      Hi, I am a <b>subpannel</b>, i need() the <b>main pannel</b>, when he die, I die.
+    </div>
+
+
+    <div id="panel3" class="panel">
+      <i class="closePanel material-icons">clear</i><br>
+
+      This is the <b>secondary</b> pannel, I don't need nobody to appear or to vanish.
+    </div>
 
 <div id="mdr"><h2>c'est un test</h2></div>
 <h2>c'est un test 1</h2>
